@@ -6,21 +6,21 @@ import styles from "../styles/NavBar.module.css";
 const NavBar = () => {
   return (
     // <Navbar className={styles.NavBar} bg="dark" variant="dark" expand="md" fixed="top">
-    <Navbar className={styles.NavBar} expand="md" fixed="top">
+    <Navbar  className={styles.NavBar} expand="md" fixed="top">
         <Container>
             <Navbar.Brand><img src={logo} alt='logo' height="45"></img></Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="ml-auto text-right">
-                    <Nav.Link >
+                <Nav className="ml-auto text-right text-white ">
+                    <Nav.Link className='text-white'>
                         <i className='fas fa-home'></i>
                         Home
-                    </Nav.Link>
-                    <Nav.Link>
+                    </Nav.Link >
+                    <Nav.Link className='text-white'>
                         <i className='fas fa-sign-in'></i>
                         SignIn
                     </Nav.Link>
-                    <Nav.Link>
+                    <Nav.Link className='text-white'>
                         <i className='fas fa-user-plus'></i>
                         SignUp
                     </Nav.Link>
