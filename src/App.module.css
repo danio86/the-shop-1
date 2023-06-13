@@ -1,0 +1,38 @@
+.App {
+    font-family: "Roboto Mono", sans-serif;
+    background-color:darkslategray;
+    color: white;
+    min-height: 110vh;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+  
+  a {
+    color: white;
+    transition: color ease-in-out 0.3s;
+  }
+  
+  a:hover {
+    text-decoration: none;
+  }
+  
+  a:hover i {
+    color:darkslategrey;
+    transition: color ease-in-out 0.3s;
+  }
+  
+  i {
+    color: white;
+    font-size: 1.6rem;
+    padding: 7px;
+    vertical-align: middle;
+  }
+  
+  i:hover {
+    cursor: pointer;
+    transition: color ease-in-out 0.3s;
+    color:darkslategrey;
+  }
+
