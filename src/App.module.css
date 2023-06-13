@@ -19,7 +19,7 @@
   }
   
   a:hover {
-    color:darkslategrey;
+    color:cyan;
     text-decoration: none;
   }
   
@@ -33,6 +33,7 @@
     font-size: 1.6rem;
     padding: 7px;
     vertical-align: middle;
+    
   }
   
   i:hover {
@@ -41,3 +42,49 @@
     color:darkslategrey;
   }
 
+  .Content {
+    background-color: rgb(35, 35, 35);
+    padding: 10px;
+    border-radius: 2px;
+    border: 1px solid #dadadf;
+  }
+
+  .Content:hover {
+    background-color:rgb(24, 68, 55);
+    border: 1px solid rgb(35, 35, 35);
+  }
+  
+  .FillerImage {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+  }
+  
+  .Image {
+    max-height: 40vh;
+    max-width: 100%;
+    object-fit: contain;
+  }
+
+  figure {
+    text-align: center;
+    display: inline-block;
+  }
+  
+  /* scrollbar */
+  *::-webkit-scrollbar {
+    width: 5px;
+  }
+  *::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  *::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+  *::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+
+  input[type="file"] {
+    display: none;
+  }

@@ -12,3 +12,8 @@
 .Active i {
     color:darkslategray;
 }
+
+.Logo {
+    border-radius: 25px;
+    height: 50px;
+}
