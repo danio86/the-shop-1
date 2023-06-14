@@ -5,9 +5,21 @@ import Container from "react-bootstrap/Container";
 import "./api/axiosDefaults"
 import SignUpForm from "./pages/auth/SignUpForm";
 import SignInForm from "./pages/auth/SignInForm";
+import { useState } from "react";
 
 
 function App() {
+    const [currentUser, setCurrentUser] = useState(null);
+
+    const handleMount = async () => {
+        try {
+          const { data } = await axios.get("dj-rest-auth/user/");
+          setCurrentUser(data);} 
+        catch (e) {
+          console.log(e);}
+      };
+
+
   return (
     <div className={styles.App}>
       <NavBar />
