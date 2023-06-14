@@ -12,10 +12,10 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 const SignUpForm = () => {
     const [signUpData, setSignUpData] = useState({
         username: '',
-        password: '',
+        password1: '',
         password2: '',
     });
-    const { username, password, password2 } = signUpData;
+    const { username, password1, password2 } = signUpData;
 
     const [errors, setErrors] = useState({});
     // to display error
@@ -71,18 +71,18 @@ const SignUpForm = () => {
               </Alert>
             ))}
 
-            <Form.Group controlId="password">
+            <Form.Group controlId="password1">
                 <Form.Label className="d-none">Password</Form.Label>
                 <Form.Control 
                     className={styles.Input} 
                     type="password" 
                     placeholder="Password" 
-                    name="password" 
-                    value={password} 
+                    name="password1" 
+                    value={password1} 
                     onChange={handleChange} />
             </Form.Group>
-            {errors.password?.map((message, idx) => (
-              <Alert key={idx} variant="warning">
+            {errors.password1?.map((message, idx) => (
+              <Alert variant="warning" key={idx}>
                 {message}
               </Alert>
             ))}
@@ -107,6 +107,11 @@ const SignUpForm = () => {
             <Button className={styles.Submit} variant="primary" type="submit">
                 Sign Up
             </Button>
+            {errors.non_field_errors?.map((message, idx) => (
+              <Alert key={idx} variant="dark">
+                {message}
+              </Alert>
+            ))}
           </Form>
 
         </Container>
