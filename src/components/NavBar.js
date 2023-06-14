@@ -7,21 +7,28 @@ import { CurrentUserContext } from '../App';
 
 const NavBar = () => {
     const currentUser = useContext(CurrentUserContext);
+  
 
-    const loggedInIcons =
+    // const loggedInIcons =
     const loggedOutIcons = (
-        <>
-        {/* alles in diesem empty element wird nicht gerendert */}
-        <NavLink to="/signin" className={styles.NavLink} activeClassName={styles.Active}>
-            <i className='fas fa-sign-in'></i>
-            SignIn
-        </NavLink>
-        <NavLink to="/signup" className={styles.NavLink} activeClassName={styles.Active}>
-            <i className='fas fa-user-plus'></i>
-            SignUp
-        </NavLink>
-        </>
-      );
+    <>
+      <NavLink
+        className={styles.NavLink}
+        activeClassName={styles.Active}
+        to="/signin"
+      >
+        <i className="fas fa-sign-in-alt"></i>Sign in
+      </NavLink>
+      <NavLink
+        to="/signup"
+        className={styles.NavLink}
+        activeClassName={styles.Active}
+      >
+        <i className="fas fa-user-plus"></i>Sign up
+      </NavLink>
+    </>
+  );
+
 
   return (
     // <Navbar className={styles.NavBar} bg="dark" variant="dark" expand="md" fixed="top">
