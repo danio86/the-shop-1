@@ -1,16 +1,15 @@
-import React, { useContext } from 'react';
-import { Container, Nav, Navbar } from 'react-bootstrap';
-import logo from '../assets/logo.png';
-import styles from '../styles/NavBar.module.css';
-import { NavLink } from 'react-router-dom';
-import { CurrentUserContext } from '../App';
+import React, { useContext } from "react";
+import { Navbar, Container, Nav } from "react-bootstrap";
+import logo from "../assets/logo.png";
+import styles from "../styles/NavBar.module.css";
+import { NavLink } from "react-router-dom";
+import { CurrentUserContext } from "../App";
 
 const NavBar = () => {
-    const currentUser = useContext(CurrentUserContext);
-  
+  const currentUser = useContext(CurrentUserContext);
 
-    // const loggedInIcons =
-    const loggedOutIcons = (
+  const loggedInIcons = <>{currentUser?.username}</>;
+  const loggedOutIcons = (
     <>
       <NavLink
         className={styles.NavLink}
@@ -29,31 +28,33 @@ const NavBar = () => {
     </>
   );
 
-
   return (
-    // <Navbar className={styles.NavBar} bg="dark" variant="dark" expand="md" fixed="top">
-    <Navbar  className={styles.NavBar} expand="md" fixed="top">
-        <Container>
-            <NavLink to="/">
-                <Navbar.Brand >
-                    <img className={styles.Logo} src={logo} alt="logo"></img>
-                </Navbar.Brand>
-            </NavLink>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="ml-auto text-right text-white ">
-                <NavLink
-                    exact
-                    className={styles.NavLink} activeClassName={styles.Active} to="/">
-                    <i className="fas fa-home"></i>
-                    Home
-                </NavLink>
-                    
-                </Nav>  
-            </Navbar.Collapse>
-        </Container>
-    </Navbar>
-  )
-}
+    <Navbar className={styles.NavBar} expand="md" fixed="top">
+      <Container>
+        <NavLink to="/">
+          <Navbar.Brand>
+            <img src={logo} alt="logo" height="45" />
+          </Navbar.Brand>
+        </NavLink>
 
-export default NavBar
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="ml-auto text-left">
+            <NavLink
+              exact
+              className={styles.NavLink}
+              activeClassName={styles.Active}
+              to="/"
+            >
+              <i className="fas fa-home"></i>Home
+            </NavLink>
+
+            {currentUser ? loggedInIcons : loggedOutIcons}
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
+  );
+};
+
+export default NavBar;

@@ -10,14 +10,14 @@ import axios from "axios";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { SetCurrentUserContext } from "../../App";
 
-const SignInForm = () => {
-    const setCurrentUser = useContext(SetCurrentUserContext)
+function SignInForm() {
+    const setCurrentUser = useContext(SetCurrentUserContext);
 
     const [signInData, setSignInData] = useState({
         username: '',
-        password1: '',
+        password: '',
     });
-    const { username, password1 } = signInData;
+    const { username, password } = signInData;
 
     const [errors, setErrors] = useState({});
     // to display error
@@ -74,17 +74,17 @@ const SignInForm = () => {
               </Alert>
             ))}
 
-            <Form.Group controlId="password1">
+            <Form.Group controlId="password">
                 <Form.Label className="d-none">Password</Form.Label>
                 <Form.Control 
                     className={styles.Input} 
                     type="password" 
                     placeholder="Password" 
-                    name="password1" 
-                    value={password1} 
+                    name="password" 
+                    value={password} 
                     onChange={handleChange} />
             </Form.Group>
-            {errors.password1?.map((message, idx) => (
+            {errors.password?.map((message, idx) => (
               <Alert variant="warning" key={idx}>
                 {message}
               </Alert>
@@ -120,6 +120,6 @@ const SignInForm = () => {
       </Col>
     </Row>
   );
-};
+}
 
 export default SignInForm;

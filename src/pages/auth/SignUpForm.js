@@ -71,7 +71,7 @@ const SignUpForm = () => {
               </Alert>
             ))}
 
-            <Form.Group controlId="password1">
+            <Form.Group controlId="password">
                 <Form.Label className="d-none">Password</Form.Label>
                 <Form.Control 
                     className={styles.Input} 
@@ -107,11 +107,6 @@ const SignUpForm = () => {
             <Button className={styles.Submit} variant="primary" type="submit">
                 Sign Up
             </Button>
-            {errors.non_field_errors?.map((message, idx) => (
-              <Alert key={idx} variant="dark" className="mt-3">
-                {message}
-              </Alert>
-            ))}
           </Form>
 
         </Container>
