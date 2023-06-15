@@ -7,7 +7,47 @@ import { useCurrentUser } from "../contexts/CurrentUserContext";
 
 const NavBar = () => {
   const currentUser = useCurrentUser();
-  const loggedInIcons = <>{currentUser?.username}</>;
+
+//   das wird der add irgendwas link der wird später woanders eingesetzt
+  const addPostIcon = (
+  <NavLink
+    className={styles.NavLink}
+    activeClassName={styles.Active}
+    to="/posts/create">
+    <i className="fas fa-plus-circle"></i>Add posts
+  </NavLink> );
+//   das (oben) wird der add irgendwas link der wird später woanders eingesetzt
+
+  const loggedInIcons = <>
+  <NavLink
+    className={styles.NavLink}
+    activeClassName={styles.Active}
+    to="/feed">
+    <i className="fas fa-comments"></i>Feed
+  </NavLink>
+  <NavLink
+    className={styles.NavLink}
+    activeClassName={styles.Active}
+    to="/liked">
+    <i className="far fa-thumbs-up"></i>Liked
+  </NavLink>
+  <NavLink
+        to="/"
+        className={styles.NavLink}
+        // activeClassName={styles.Active}
+        onClick ={() => {}}
+        >
+        <i className="fas fa-sign-out"></i>Logout
+  </NavLink>
+  <NavLink
+        to={`/profile/${currentUser?.profile_id}`}
+        className={styles.NavLink}
+        activeClassName={styles.Active}
+        >
+        < img className={styles.Avatar} src={currentUser?.profile_image} text="Profile"/>Profile
+  </NavLink>
+  </>;
+
   const loggedOutIcons = (
     <>
       <NavLink
@@ -20,8 +60,7 @@ const NavBar = () => {
       <NavLink
         to="/signup"
         className={styles.NavLink}
-        activeClassName={styles.Active}
-      >
+        activeClassName={styles.Active}>
         <i className="fas fa-user-plus"></i>Sign up
       </NavLink>
     </>
@@ -35,6 +74,9 @@ const NavBar = () => {
             <img src={logo} alt="logo" height="45" />
           </Navbar.Brand>
         </NavLink>
+
+        {currentUser && addPostIcon}
+        {/* shows add link only when user is loggedin */}
 
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
