@@ -1,24 +1,20 @@
-import React, {useEffect, useRef, useState} from "react";
+import React from "react";
 import { Navbar, Container, Nav } from "react-bootstrap";
 import logo from "../assets/logo.png";
 import styles from "../styles/NavBar.module.css";
 import { NavLink } from "react-router-dom";
 import { useCurrentUser, useSetCurrentUser } from "../contexts/CurrentUserContext";
 import axios from "axios";
+import useClickOutsideToggle from "../hooks/useClickOutsideToggle";
 
 
 const NavBar = () => {
   const currentUser = useCurrentUser();
+//   const setCurrent{User = useSetCurrentUser();
   const setCurrentUser = useSetCurrentUser();
 
-  const [expanded, setExpanded] = useState(false);
-//   const { expanded, setExpanded, ref } = useClickOutsideToggle();
-//   hat der user auf user auf den burger geklickt oder nicht
-  const ref = useRef(null);
-//   nur ein Referenzwert
-  useEffect(() => {
-
-  })
+  const { expanded, setExpanded, ref } = useClickOutsideToggle();
+//   call created hook
 
   const handleSignOut = async () => {
     try {
@@ -102,6 +98,7 @@ const NavBar = () => {
         {/* shows add link only when user is loggedin */}
 
         <Navbar.Toggle 
+            className={styles.navbarToggler}
             ref = {ref}
             // einfach ein referenzattribut (mit wert ref > wurde oben definert)
             onClick={() => setExpanded(!expanded)}

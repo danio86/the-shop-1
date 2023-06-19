@@ -9,6 +9,10 @@
     color: white;
 }
 
+.navbarToggler {
+    background-color: white;
+}
+
 .Avatar {
     border-radius: 25px;
     object-fit: cover;
