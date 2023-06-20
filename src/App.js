@@ -4,11 +4,15 @@ import SideBar from "./components/SideBar";
 import Container from "react-bootstrap/Container";
 import { Route, Switch } from "react-router-dom";
 import "./api/axiosDefaults";
+import HomePage from "./pages/Homepage";
 import SignUpForm from "./pages/auth/SignUpForm";
 import SignInForm from "./pages/auth/SignInForm";
-import Products from "./pages/Products";
+import Agents from "./pages/Agents";
 import Properties from "./pages/Properties";
-import About from "./pages/About";
+import Reviews from "./pages/Reviews";
+import Messages from "./pages/Messages";
+// import {useList} from 'react-use';
+
 
 
 
@@ -23,12 +27,13 @@ function App() {
           <SideBar />
           <Container className={styles.Main}>
             <Switch>
-              <Route exact path="/" render={() => <h1>Home page</h1>} />
+              <Route exact path="/" render={() => <HomePage />} />
               <Route exact path="/signin" render={() => <SignInForm />} />
               <Route exact path="/signup" render={() => <SignUpForm />} />
-              <Route exact path="/products" render={() => <Products />} />
+              <Route exact path="/messages" render={() => <Messages />} />
               <Route exact path="/properties" render={() => <Properties />} />
-              <Route exact path="/about" render={() => <About />} />
+              <Route exact path="/reviews" render={() => <Reviews />} />
+              <Route exact path="/agents" render={() => <Agents />} />
               <Route render={() => <p>Page not found!</p>} />
             </Switch>
           </Container>

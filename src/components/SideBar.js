@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css/'
 // import 'bootstrap-icons/font/bootstrap-icons.js'
 import { NavLink } from 'react-router-dom';
-import { Navbar, Container, Nav } from "react-bootstrap";
+// import { Navbar, Container, Nav } from "react-bootstrap";
 import styles from "../styles/SideBar.module.css";
 
 
@@ -14,10 +14,10 @@ const SideBar = () => {
 
     const item = [
         {
-            path: "/products",
-            name: "products",
-            icon: <i class="fas fa-store"></i>,
-            text: "Products",
+            path: "/agents",
+            name: "agents",
+            icon: <i class="fas fa-user-friends"></i>,
+            text: "Agents",
         },
         {
             path: "/properties",
@@ -26,16 +26,22 @@ const SideBar = () => {
             text: "Properties",
         },
         {
-            path: "/about",
-            name: "about",
-            icon: <i class="fas fa-info-circle"></i>,
-            text: "About",
+            path: "/reviews",
+            name: "reviews",
+            icon: <i class="far fa-star"></i>,
+            text: "Reviews",
+        },
+        {
+            path: "/messages",
+            name: "messages",
+            icon: <i class="fas fa-comments"></i>,
+            text: "Messages",
         },
 
     ]
   return (
     <div className={styles.Container}>
-        <div className={styles.SideBar} style={{width: expanded ? "200px" : "50px"}}>
+        <div className={styles.SideBar} style={{width: expanded ? "200px" : "100%"}}>
             <div className={styles.TopSection}>
             {/* <h1 style={{display: expanded ? "block" : "none"}} className="logo">Logo</h1> */}
                 {/* <div 

@@ -32,7 +32,7 @@ Main{
     color: white;
     height: 100vh;
     width: 200px;
-    padding: 10px 20px 10px 20px;
+    padding: 10px 10px;
     transition: all 0.5s;
 }
 
@@ -44,7 +44,7 @@ Main{
 
 .Link{
     display: flex;
-    color: #fff;
+    color: white;
     padding: 10px 0px;
     gap: 15px;
     transition: all 0.5s;
@@ -54,9 +54,9 @@ Main{
 }
 
 .Link:hover{
-    /* background:darkslategray; */
+    background-color: aqua;
     border: 1px solid white;
-    color: white;
+    color: darkslategray;
     transition: all 0.5s;
     text-decoration: none;
 }
