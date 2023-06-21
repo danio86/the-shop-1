@@ -1,8 +1,19 @@
 import React from 'react'
+import { Form, Button, Image, Col, Row, Container, Alert, Card } from "react-bootstrap";
 
-const PieChart = () => {
+
+
+
+const PieChart = (title, series, value, colors) => {
   return (
-    <div>PieChart</div>
+    <Container>
+        <Card>
+            <Card.Body>
+                {PieChart.title}
+                {PieChart.value}
+            </Card.Body>
+        </Card>
+    </Container>
   )
 }
 

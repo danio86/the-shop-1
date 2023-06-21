@@ -63,7 +63,7 @@ const NavBar = () => {
         className={styles.NavLink}
         activeClassName={styles.Active}
         >
-        < img className={styles.Avatar} src={currentUser?.profile_image} text="Profile"/>Profile
+        < img className={styles.Avatar} src={currentUser?.profile_image} alt="Avatar" text="Profile"/>Profile
   </NavLink>
   </>;
 
