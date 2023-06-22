@@ -2,8 +2,10 @@ import React from 'react';
 // import { useList } from "@corets/use-list";
 
 import appStyles from "../App.module.css";
+import styles from "../styles/PieChart.module.css";
+
 // import { Form, Button, Image, Col, Row, Container, Alert } from "react-bootstrap";
-import { Col, Row, Container } from "react-bootstrap";
+import { Col, Row, Container, Card } from "react-bootstrap";
 // import styles from "../../styles/SignInUpForm.module.css";
 
 
@@ -13,6 +15,7 @@ import { Col, Row, Container } from "react-bootstrap";
 // import PropertyReferrals from '../components/charts/PropertyReferrals'
 
 import BarChart from '../components/charts/BarChart';
+import PieChart from '../components/charts/PieChart';
 
 
 const Homepage = () => {
@@ -27,19 +30,32 @@ const Homepage = () => {
       </Col>
 
       <Container mt="20px" display="flex" flexWrap="wrap" gap={4}>
-            <BarChart />
-            {/* <PieChart
-                title="Total customers"
-                value={5684}
-                series={[75, 25]}
-                colors={["#275be8", "#c4e8ef"]}
-            />
+            
+            <Card className={styles.PieChart} >
             <PieChart
-                title="Properties for Cities"
-                value={555}
-                series={[75, 25]}
-                colors={["#275be8", "#c4e8ef"]}
-            /> */}
+                title={'Properties for Sale'}
+            />
+            </Card>
+            <Card className={styles.PieChart} >
+            <PieChart
+                title={'Properties for Rent'}
+            />
+            </Card>
+            <Card className={styles.PieChart} >
+            <PieChart 
+                title={'Total customers'}
+            />
+            </Card>
+            <Card className={styles.PieChart} >
+            <PieChart 
+                title={'Properties for Cities'}
+            />
+            </Card>
+      </Container>
+      <Container mt="20px" display="flex" flexWrap="wrap" gap={4}>
+            <>
+            <BarChart />
+            </>
       </Container>
 
     </Row>    
