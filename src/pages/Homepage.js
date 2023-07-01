@@ -15,6 +15,7 @@ import { Col, Row, Container, Card } from "react-bootstrap";
 // import PropertyReferrals from '../components/charts/PropertyReferrals'
 
 import BarChart from '../components/charts/BarChart';
+import BarChartHorizontal from '../components/charts/BarChartHorizontal';
 import PieChart from '../components/charts/PieChart';
 
 
@@ -63,6 +64,7 @@ const Homepage = () => {
       <Container mt="20px" display="flex" flexWrap="wrap" gap={4}>
             <>
             <BarChart />
+            <BarChartHorizontal />
             </>
       </Container>
 

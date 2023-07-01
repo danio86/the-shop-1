@@ -1,6 +1,6 @@
 import React from 'react'
 // import {Bar} from 'react-chartjs-2'
-import { Bar, Line, Pie, defaults  } from "react-chartjs-2";
+    import { Bar, Line, Pie, defaults  } from "react-chartjs-2";
 
 // defaults.global.tooltips.enabled = false;
 defaults.global.legend.position = 'bottom';
