@@ -6,7 +6,7 @@ import Homepage from '../../pages/Homepage';
 // defaults.global.tooltips.enabled = false;
 // defaults.global.legend.position = 'bottom';
 
-const PieChart = ({title, value}) => {
+const PieChart = ({title, value, color}) => {
   return (
     <Doughnut
         data={{
@@ -17,7 +17,8 @@ const PieChart = ({title, value}) => {
                 data: [value, 100-value],
                 backgroundColor: [
                     // 'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
+                    // 'rgba(54, 162, 235, 0.2)',
+                    color,
                     // 'rgba(255, 206, 86, 0.2)',
                     'rgba(75, 192, 192, 0.2)',
                     // 'rgba(153, 102, 255, 0.2)',
