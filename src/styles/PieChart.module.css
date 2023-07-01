@@ -10,3 +10,15 @@
     display: flex;
     justify-content: center;
 }
+
+.BarChartBackground {
+    display: flex;
+    padding: 20px;
+    align-items: center;
+    height: fit-content;
+}
+
+.BarChart {
+    width: 50%;
+    margin: 0 50px 0 0;
+}
