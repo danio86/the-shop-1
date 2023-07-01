@@ -3,6 +3,7 @@
     background-color:darkslategray;
     color: white;
     min-height: 110vh;
+    display: flex;
   }
 
   .Main {

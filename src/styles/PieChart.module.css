@@ -1,5 +1,7 @@
 .PieChart {
-    width: 20%;
+    width: fit-content;
     float: left;
     margin: 20px;
+    padding: 5px 20px;
+    height: 120px;
 }

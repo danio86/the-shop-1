@@ -34,21 +34,25 @@ const Homepage = () => {
             <Card className={styles.PieChart} >
             <PieChart
                 title={'Properties for Sale'}
+                value={52}
             />
             </Card>
             <Card className={styles.PieChart} >
             <PieChart
                 title={'Properties for Rent'}
+                value={38}
             />
             </Card>
             <Card className={styles.PieChart} >
             <PieChart 
                 title={'Total customers'}
+                value={95}
             />
             </Card>
             <Card className={styles.PieChart} >
             <PieChart 
                 title={'Properties for Cities'}
+                value={88}
             />
             </Card>
       </Container>
