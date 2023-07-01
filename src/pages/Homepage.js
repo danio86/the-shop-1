@@ -61,10 +61,16 @@ const Homepage = () => {
             />
             </Card>
       </Container>
-      <Container mt="20px" display="flex" flexWrap="wrap" gap={4}>
+      <Container className={styles.BarChartBackground} mt="20px" display="flex" flexWrap="wrap" gap={4}>
             <>
-            <BarChart />
-            <BarChartHorizontal />
+            <Card>
+                <BarChart 
+                    title={'Total Revenue'}
+                />
+            </Card>
+            <Card>
+                <BarChartHorizontal />
+            </Card>
             </>
       </Container>
 

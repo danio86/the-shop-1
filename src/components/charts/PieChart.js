@@ -59,10 +59,10 @@ const PieChart = ({title, value, color}) => {
                 display: true,
                 text: title
             },
-            data: {
-                display: true,
-                Number: value
-            }
+            // data: {
+            //     display: true,
+            //     Number: value
+            // }
         
         }}
         />
