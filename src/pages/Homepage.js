@@ -68,6 +68,7 @@ const Homepage = () => {
                 <Card className={styles.BarChart}>
                     <BarChart 
                         title={'Total Revenue'}
+                        value={230}
                     />
                 </Card>
                 <Card>

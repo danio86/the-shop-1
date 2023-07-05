@@ -5,7 +5,7 @@ import { Bar, Line, Pie, defaults  } from "react-chartjs-2";
 // defaults.global.tooltips.enabled = false;
 defaults.global.legend.position = 'bottom';
 
-const BarChart = ({title}) => {
+const BarChart = ({title, value}) => {
   return (
     <>
     <Bar
@@ -40,6 +40,14 @@ const BarChart = ({title}) => {
                 backgroundColor: 'rgba(75, 192, 192, 0.2)',
                 borderColor: 'rgba(75, 192, 192, 1)',
                 borderWidth: 1,
+            },
+            {
+                label: value+'$',
+                barThickness: 0,
+                data: [value],
+                
+
+                // backgroundColor: 'rgba(255,255,255,0.1)',
             }
         ]
         }}
@@ -50,14 +58,17 @@ const BarChart = ({title}) => {
             maintainAspectRatio: false,
             scales: {
                 yAxes: [{
+                    scaleLabel: {
+                        display: true,
+                        labelString: '$ (thousands)'
+                    },
                     ticks: {
                         beginAtZero: true,
                         callback: function(value, index, values) {
-                            return value + 'K';
+                            return value;
                         }
                         
                     },
-                    labels: ['K'],
 
                 }]
             },
@@ -66,6 +77,7 @@ const BarChart = ({title}) => {
                 position: 'top',
                 labels: {
                     fontSize: 10,
+                    
                     
 
                 }
@@ -78,10 +90,19 @@ const BarChart = ({title}) => {
                 //     bottom: 0
                 // },
                 display: true,
-                text: title,
-                fontSize: 30
+                text: [title, value+'$'],
+                fontSize: 20
             },
             
+            subtitles:[
+                {
+                    text: "This is a Subtitle",
+                    display: true,
+                    //Uncomment properties below to see how they behave
+                    fontColor: "red",
+                    fontSize: 30
+                }
+                ],
             
             
         }}
