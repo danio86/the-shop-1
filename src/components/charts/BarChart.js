@@ -43,11 +43,11 @@ const BarChart = ({title, value}) => {
             },
             {
                 label: value+'$',
-                barThickness: 0,
+                // barThickness: 0,
                 data: [value],
-                
-
-                // backgroundColor: 'rgba(255,255,255,0.1)',
+                backgroundColor: 'rgba(255,255,255,0.1)',
+                fontSize: 30,
+                // barPercentage: 1,
             }
         ]
         }}
@@ -77,9 +77,6 @@ const BarChart = ({title, value}) => {
                 position: 'top',
                 labels: {
                     fontSize: 10,
-                    
-                    
-
                 }
             },
             title: {

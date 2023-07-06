@@ -1,6 +1,5 @@
 import React from 'react'
-import { HorizontalBar } from "react-chartjs-2";
-
+import { HorizontalBar , plugins} from "react-chartjs-2";
 
 const BarChartHorizontal = () => {
   return (
@@ -8,9 +7,9 @@ const BarChartHorizontal = () => {
         <HorizontalBar
 
         data={{
-            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+            labels: ['Social Media', 'Marcetpaces', 'Websites', 'Digital Ads', 'Others'],
             datasets: [{
-                label: 'Properties',
+                
                 data: [152, 119, 33, 15, 25, 13],
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
@@ -44,20 +43,40 @@ const BarChartHorizontal = () => {
         height={200}
         width={200}
         options={{ 
+           
             maintainAspectRatio: false,
             scales: {
                 xAxes: [{
-                    ticks: {
-                        beginAtZero: true
+                    gridLines: {
+                        display:false
                     }
+                }],
+                yAxes: [{
+                    gridLines: {
+                        display:false
+                    },
+                    
+                        // ticks: {
+                        //     // Include a dollar sign in the ticks
+                        //     callback: function(value, index, values) {
+                        //         return '$' + value;
+                        //     }
+                        // }
+                    
+                    
                 }]
             },
+            title: {
+                display: true,
+                text: 'Property Referrals'
+            },
             legend: {
-                labels: {
-                    fontSize: 10,
-
-                }
-            }
+                display: false,
+            },
+            datalabels: {
+                display: true,
+                color: "black"
+              }
         }}
         
         />
