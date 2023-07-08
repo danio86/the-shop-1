@@ -1,11 +1,12 @@
 import React from 'react'
 // import {Bar} from 'react-chartjs-2'
 import { Bar, Line, Pie, defaults  } from "react-chartjs-2";
+import plugins from "react-chartjs-2"
 
 // defaults.global.tooltips.enabled = false;
-defaults.global.legend.position = 'bottom';
+// defaults.global.legend.position = 'bottom';
 
-const BarChart = ({title, value}) => {
+const BarChart = ({title, value, subtitle}) => {
   return (
     <>
     <Bar
@@ -91,15 +92,12 @@ const BarChart = ({title, value}) => {
                 fontSize: 20
             },
             
-            subtitles:[
-                {
-                    text: "This is a Subtitle",
+            plugins: {
+                subtitle: {
                     display: true,
-                    //Uncomment properties below to see how they behave
-                    fontColor: "red",
-                    fontSize: 30
+                    text: 'Custom Chart Subtitle'
                 }
-                ],
+            }
             
             
         }}

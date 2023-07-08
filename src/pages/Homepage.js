@@ -69,13 +69,20 @@ const Homepage = () => {
                     <BarChart 
                         title={'Total Revenue'}
                         value={230}
+                        subtitle={<h4 className={styles.SubTitle}>'test'</h4>}
+                        // subtitle={'test'}
+
                     />
                 </Card>
                 <Card>
-                    <BarChartHorizontal />
+                    <BarChartHorizontal
+                     />
                 </Card>
             </div>
             </>
+      </Container>
+      <Container>
+        <h2>Properties</h2>
       </Container>
 
     </Row>    

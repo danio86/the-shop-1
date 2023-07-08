@@ -1,5 +1,8 @@
+// import { toHaveValue } from '@testing-library/jest-dom/dist/matchers';
 import React from 'react'
-import { HorizontalBar , plugins} from "react-chartjs-2";
+import { HorizontalBar } from "react-chartjs-2";
+// import "chartjs-plugin-datalabels" from ;
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
 
 const BarChartHorizontal = () => {
   return (
@@ -10,7 +13,7 @@ const BarChartHorizontal = () => {
             labels: ['Social Media', 'Marcetpaces', 'Websites', 'Digital Ads', 'Others'],
             datasets: [{
                 
-                data: [152, 119, 33, 15, 25, 13],
+                data: [92, 79, 33, 15, 25, 13],
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',
@@ -29,13 +32,14 @@ const BarChartHorizontal = () => {
                 ],
                 borderWidth: 1,
             },
-            // {
-            //     label: 'Quantity',
-            //     data: [120, 190, 30, 50, 20, 30],
-            //     backgroundColor: 'orange',
-            //     borderColor: 'yellow',
-            //     borderWidth: 1,
-            // }
+            {
+                // label: 'Quantity',
+                data: [100, 100, 100, 100, 100, 100],
+                // backgroundColor: 'grey',
+                backgroundColor: 'rgba(232,232,232)',
+                // borderColor: 'yellow',
+                borderWidth: 1,
+            }
         ]
             
         }}
@@ -47,11 +51,19 @@ const BarChartHorizontal = () => {
             maintainAspectRatio: false,
             scales: {
                 xAxes: [{
+                    stacked: false,
                     gridLines: {
                         display:false
+                    },
+                    ticks: {
+                        // Include a dollar sign in the ticks
+                        callback: function(value, index, values) {
+                            return value + '%' ;
+                        }
                     }
                 }],
                 yAxes: [{
+                    stacked: true,
                     gridLines: {
                         display:false
                     },
@@ -76,7 +88,8 @@ const BarChartHorizontal = () => {
             datalabels: {
                 display: true,
                 color: "black"
-              }
+              },
+              
         }}
         
         />
