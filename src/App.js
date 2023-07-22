@@ -11,10 +11,7 @@ import Agents from "./pages/Agents";
 import Properties from "./pages/Properties";
 import Reviews from "./pages/Reviews";
 import Messages from "./pages/Messages";
-// import BarChart from "./components/charts/BarChart";
-
-
-
+import CreateProperties from "./pages/CreateProperties";
 
 
 function App() {
@@ -32,6 +29,7 @@ function App() {
               <Route exact path="/signup" render={() => <SignUpForm />} />
               <Route exact path="/messages" render={() => <Messages />} />
               <Route exact path="/properties" render={() => <Properties />} />
+              <Route exact path="/properties/create" render={() => <CreateProperties />} />
               <Route exact path="/reviews" render={() => <Reviews />} />
               <Route exact path="/agents" render={() => <Agents />} />
               <Route render={() => <p>Page not found!</p>} />

@@ -22,6 +22,12 @@
     };
     flex: fullWidth? 1: unset;
     width: fullWidth? 100% : fit-content; */
-    
+}
 
+.AddProp:hover{
+    background-color: aqua;
+    border: 1px solid white;
+    color: darkslategray;
+    transition: all 0.5s;
+    text-decoration: none;
 }
