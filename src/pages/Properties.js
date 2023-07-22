@@ -1,17 +1,23 @@
 import React, {useEffect, useList} from 'react'
 import { Container } from 'react-bootstrap';
 import {useNavigate, NavLink} from "react-router-dom";
-import styles from "../styles/Properties.module.css"
+import CustomButton from '../components/common/CustomButton';
+import PropertyCard from '../components/common/PropertyCard';
+import styles from '../styles/Properties.module.css';
+
 
 const Properties = () => {
   return (
-    <Container className={styles.Container}>
+    <Container className={styles.Properties}>
+        {/* <div className={styles.Properties}>Properties! */}
         <div>Properties!</div>
-
-        <button
-            title={'All Properties'}
-            handleClick={()=>{}}
+        <div>
+        <CustomButton className={styles.AddProp}
+            title= {'Add Properties'}
+            handleClick= {()=>{NavLink('/properties/create')}}
+            icon= {<i class="fas fa-plus-circle"></i>}
         />
+        </div>
     </Container>
   )
 }
