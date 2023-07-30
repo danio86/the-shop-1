@@ -12,6 +12,8 @@ import Properties from "./pages/Properties";
 import Reviews from "./pages/Reviews";
 import Messages from "./pages/Messages";
 import CreateProperties from "./pages/CreateProperties";
+import Property from "./pages/properties/Property";
+import PropertyCreateForm from "./pages/properties/PropertyCreateForm";
 
 
 function App() {
@@ -29,6 +31,8 @@ function App() {
               <Route exact path="/signup" render={() => <SignUpForm />} />
               <Route exact path="/messages" render={() => <Messages />} />
               <Route exact path="/properties" render={() => <Properties />} />
+              <Route exact path="/property" render={() => <Property />} />
+              <Route exact path="/property/create" render={() => <PropertyCreateForm />} />
               <Route exact path="/properties/create" render={() => <CreateProperties />} />
               <Route exact path="/reviews" render={() => <Reviews />} />
               <Route exact path="/agents" render={() => <Agents />} />
