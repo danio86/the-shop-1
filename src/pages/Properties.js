@@ -12,7 +12,7 @@ const Properties = () => {
 
     const history = useHistory();
     const handleClick = (event) => {
-            let path = "/properties/create"; 
+            let path = "/property/create"; 
             history.push(path);   
       };
 
