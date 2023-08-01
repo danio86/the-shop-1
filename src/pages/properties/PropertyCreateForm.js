@@ -5,6 +5,7 @@ import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
+import Dropdown from 'react-bootstrap/Dropdown';
 
 import Upload from "../../assets/upload.png";
 
@@ -21,13 +22,15 @@ import { useRedirect } from "../../hooks/useRedirect";
 function PropertyCreateForm() {
 //   useRedirect("loggedOut");
   const [errors, setErrors] = useState({});
-
   const [postData, setPostData] = useState({
     title: "",
     content: "",
+    type: "",
+    price:"",
+    location:"",
     image: "",
   });
-  const { title, content, image } = postData;
+  const { title, content, type, price, location, image } = postData;
 
   const imageInput = useRef(null);
   /* wir brauchen den refhook um das image 
@@ -69,6 +72,9 @@ function PropertyCreateForm() {
 
     formData.append("title", title);
     formData.append("content", content);
+    formData.append("type", type);
+    formData.append("price", price);
+    formData.append("location", location);
     formData.append("image", imageInput.current.files[0]);
 
     try {
@@ -98,6 +104,7 @@ import and use the axiosReq instance and post  the formData to the posts endpoin
         <Form.Control
           type="text"
           name="title"
+          required
           value={title}
           onChange={handleChange}
           /* die neuen Werte müssen noch hier rein */
@@ -121,6 +128,75 @@ import and use the axiosReq instance and post  the formData to the posts endpoin
         />
       </Form.Group>
       {errors?.content?.map((message, idx) => (
+        <Alert variant="warning" key={idx}>
+          {message}
+        </Alert>
+      ))}
+
+<Form.Group>
+        {/* <Form.Label>Title</Form.Label> */}
+        <Form.Label>Select property type</Form.Label>
+        <Form.Control
+          as="select"
+          value={type}
+          name="type"
+          displayEmpty
+          required
+        //   defaultValue={"apartment"}
+        //   inputProps = {{'aria-lable': 'Without lable'}}
+          onChange={handleChange}
+        >
+          <option value="apartment">Apartment</option>
+          <option value="villa">Villa</option>
+          <option value="farmhouse">Farmhouse</option>
+          <option value="condos">Condos</option>
+          <option value="townhouse">Townhouse</option>
+          <option value="duplex">Duplex</option>
+          <option value="studio">Studio</option>
+          <option value="chalet">Chalet</option>
+        </Form.Control>
+      </Form.Group>
+      {errors?.type?.map((message, idx) => (
+        /* title fragt nach dem errors key */
+        <Alert variant="warning" key={idx}>
+          {message}
+        </Alert>
+      ))}
+
+<Form.Group>
+        {/* <Form.Label>Title</Form.Label> */}
+        <Form.Label>Price</Form.Label>
+        <Form.Control
+          type="number"
+        //   name="title"
+          name="price"
+          required
+          value={price}
+          onChange={handleChange}
+          /* die neuen Werte müssen noch hier rein */
+        />
+      </Form.Group>
+      {errors?.price?.map((message, idx) => (
+        /* title fragt nach dem errors key */
+        <Alert variant="warning" key={idx}>
+          {message}
+        </Alert>
+      ))}
+
+<Form.Group>
+        {/* <Form.Label>Title</Form.Label> */}
+        <Form.Label>Enter Location</Form.Label>
+        <Form.Control
+        //   type="number"
+          name="location"
+          required
+          value={location}
+          onChange={handleChange}
+          /* die neuen Werte müssen noch hier rein */
+        />
+      </Form.Group>
+      {errors?.location?.map((message, idx) => (
+        /* title fragt nach dem errors key */
         <Alert variant="warning" key={idx}>
           {message}
         </Alert>
@@ -186,6 +262,7 @@ import and use the axiosReq instance and post  the formData to the posts endpoin
               <Form.File
                 id="image-upload"
                 accept="image/*"
+                required
                 onChange={handleChangeImage}
                 /* das neue Bild muss auch übergeben werden, damit
                 es gerendert werden kann. Durch accept muss es ein Bild sein */
