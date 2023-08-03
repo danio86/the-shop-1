@@ -14,7 +14,9 @@ import Messages from "./pages/Messages";
 import CreateProperties from "./pages/CreateProperties";
 import Property from "./pages/properties/Property";
 import PropertyCreateForm from "./pages/properties/PropertyCreateForm";
-
+import PostCreateForm from "./pages/posts/Post";
+import PostEditForm from "./pages/posts/PostEditForm";
+import PostPage from "./pages/posts/PostPage";
 
 function App() {
   
@@ -36,6 +38,11 @@ function App() {
               <Route exact path="/properties/create" render={() => <CreateProperties />} />
               <Route exact path="/reviews" render={() => <Reviews />} />
               <Route exact path="/agents" render={() => <Agents />} />
+
+              <Route exact path="/posts/create" render={() => <PostCreateForm />} />
+              <Route exact path="/posts/:id" render={() => <PostPage />} />
+              <Route exact path="/posts/:id/edit" render={() => <PostEditForm />} />
+
               <Route render={() => <p>Page not found!</p>} />
             </Switch>
           </Container>
