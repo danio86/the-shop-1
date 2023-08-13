@@ -69,9 +69,9 @@ const CreateProperties = () => {
     // const { register, handleSubmit } = useForm();
     // const useForm =
     const handleImageChange = () => {}
-    const onFinishHandler = (data: FieldValues) => {
-        if(!propertyImage.name) return alert('Please select an Image!');
-    }
+    // const onFinishHandler = (data: FieldValues) => {
+    //     if(!propertyImage.name) return alert('Please select an Image!');
+    // }
 
     // await onFinish({...data, photo: propertyImage.url, email:
     //  user.email})

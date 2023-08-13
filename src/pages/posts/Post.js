@@ -19,7 +19,7 @@ import Alert from "react-bootstrap/Alert";
 import { useRedirect } from "../../hooks/useRedirect";
 
 function PostCreateForm() {
-  useRedirect("loggedOut");
+//   useRedirect("loggedOut");
   const [errors, setErrors] = useState({});
 
   const [postData, setPostData] = useState({

@@ -73,7 +73,7 @@ const Property = (props) => {
             Wenn die ID nicht übereinstimmt, geben wir einfach den Post zurück und führen keine weitere Aktion damit aus, damit unsere Schleife zum nächsten Post im results-Array von prevPosts wechseln kann. */
             }));
         } catch (err) {
-            // console.log(err);
+            console.log(err);
         }
         };
     
@@ -102,7 +102,7 @@ const Property = (props) => {
             <Media className="align-items-center justify-content-between">
               <Link to={`/profiles/${profile_id}`}>
                 <Avatar src={profile_image} height={55} />
-                {owner}
+                {owner}test
               </Link>
               <div className="d-flex align-items-center">
                 <span>{updated_at}</span>

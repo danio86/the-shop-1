@@ -28,7 +28,7 @@ const Properties = () => {
     //     </div>
     // </Container>,
     <Container className={styles.Properties}>
-        <div>Properties</div>
+        <div>Properties test</div>
     <button
         className={styles.AddProp}
         onClick={handleClick}>
