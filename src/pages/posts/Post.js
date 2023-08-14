@@ -1,206 +1,175 @@
-import React, { useRef, useState } from "react";
+import React from "react";
+import styles from "../../styles/Post.module.css";
+import { useCurrentUser } from "../../contexts/CurrentUserContext";
+import { Card, Media, OverlayTrigger, Tooltip } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import Avatar from "../../components/Avatar";
+import { axiosRes } from "../../api/axiosDefaults";
+import { MoreDropdown } from "../../components/MoreDropdown";
+import { useHistory } from "react-router-dom";
 
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Container from "react-bootstrap/Container";
+const Post = (props) => {
+    /* das destructurierte prop ist vom parent component
+    man kann sich auch das api ergebnis ansehen */
+  const {
+    id,
+    owner,
+    profile_id,
+    profile_image,
+    comments_count,
+    likes_count,
+    like_id,
+    title,
+    content,
+    image,
+    updated_at,
+    postPage,
+    setPosts,
+  } = props;
 
-import Upload from "../../assets/upload.png";
+  const currentUser = useCurrentUser();
+  /* Our post component will behave differently depending on if the currentUser is the owner of the post or not.
+    So we’ll define a currentUser variable using the useCurrentUser hook exported from the
+    currentUserContexts file. */
+  const is_owner = currentUser?.username === owner;
+  /* And using that variable we’ll check if the owner of the post matches the currentUser’s
+    username, and assign the returned boolean value to the is_owner variable. */
 
-import styles from "../../styles/PropertyCreateEditForm.module.css";
-import appStyles from "../../App.module.css";
-import btnStyles from "../../styles/Button.module.css";
-import Asset from "../../components/Asset";
-import { Image } from "react-bootstrap";
-import { useHistory } from "react-router";
-import { axiosReq } from "../../api/axiosDefaults";
-import Alert from "react-bootstrap/Alert";
-import { useRedirect } from "../../hooks/useRedirect";
-
-function PostCreateForm() {
-//   useRedirect("loggedOut");
-  const [errors, setErrors] = useState({});
-
-  const [postData, setPostData] = useState({
-    title: "",
-    content: "",
-    image: "",
-  });
-  const { title, content, image } = postData;
-
-  const imageInput = useRef(null);
-  /* wir brauchen den refhook um das image 
-  an die api weiter zu geben */
   const history = useHistory();
-  /* so that we can redirect our users */
+  /* immer wenn wir den user redirecten wollen */
 
-  const handleChange = (event) => {
-    setPostData({
-      ...postData,
-      [event.target.name]: event.target.value,
-    });
+  const handleEdit = () => {
+    history.push(`/posts/${id}/edit`);
   };
-  /* erst alles was man inputten will definieren und den ursprungswert festlegen
-  dann den neuen Wert im handelevent festlegen */
+  /* hierher wird der user directed */
 
-  const handleChangeImage = (event) => {
-    if (event.target.files.length) {
-        /* wenn es eine Länge gibt, wurde ein file hochgeladen */
-      URL.revokeObjectURL(image);
-      /* Falls unser Benutzer beschließt, seine Bilddatei zu ändern, 
-      nachdem er eine hinzugefügt hat,
-      Wir müssen auch URL.revokeObjectURL aufrufen, 
-      um den Verweis des Browsers auf die vorherige Datei zu löschen. */
-      setPostData({
-        ...postData,
-        image: URL.createObjectURL(event.target.files[0]),
-        /* URL is eine React-method */
-      });
-    }
-  };
-
-  /* wie immer brauchen wir eine handel submit funktion */
-  /* diese akzeptiert das submit event als Argument */
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    /* verhindert submit wenn die Form nicht richtig ausgefüllt ist */
-    const formData = new FormData();
-
-    formData.append("title", title);
-    formData.append("content", content);
-    formData.append("image", imageInput.current.files[0]);
-
+  const handleDelete = async () => {
     try {
-      const { data } = await axiosReq.post("/posts/", formData);
-      /* posts/ ist der Endpoint der API */
-      history.push(`/posts/${data.id}`);
-      /* der User wird nun hierher geleitet. 
-      Wir haben also die url selbst definiert */
+      await axiosRes.delete(`/posts/${id}/`);
+      history.goBack();
     } catch (err) {
     //   console.log(err);
-      if (err.response?.status !== 401) {
-        setErrors(err.response?.data);
-        /* nur wenn es kein 401 ist, wenn es einer ist
-        kommt man gar nicht an diesen Punkt */
-      }
     }
-    /* Because we are sending an image file as  well as text to our API we need to refresh  
-the user's access token before we make a  request to create a post. For this, we’ll  
-import and use the axiosReq instance and post  the formData to the posts endpoint of our API */
   };
 
-  const textFields = (
-    <div className="text-center">
-      <Form.Group>
-        <Form.Label>Title</Form.Label>
-        <Form.Control
-          type="text"
-          name="title"
-          value={title}
-          onChange={handleChange}
-          /* die neuen Werte müssen noch hier rein */
-        />
-      </Form.Group>
-      {errors?.title?.map((message, idx) => (
-        /* title fragt nach dem errors key */
-        <Alert variant="warning" key={idx}>
-          {message}
-        </Alert>
-      ))}
+const handleLike = async () => {
+    /* handleLike async function so that the users can like posts.
+    Inside a try-catch block, we’ll make a post request with the axiosRes instance
+    to the likes endpoint with the post id, so that the API knows which post
+    the user is trying to like. Again, we needed to auto-import axiosRes. */
+    try {
+        const { data } = await axiosRes.post("/likes/", { post: id });
+        setPosts((prevPosts) => ({
+            /* setPosts is vom Parrent(PostPage) */
+        ...prevPosts,
+        /* prevPosts wird gesreaded nach PrevPosts */
+        results: prevPosts.results.map((post) => {
+            return post.id === id
+            ? { ...post, likes_count: post.likes_count + 1, like_id: data.id }
+            : post;
+        }),
+        /* Jetzt werden wir setPosts verwenden und ihm eine Funktion mit dem Argument prevPosts übergeben.
+        Im Inneren werden wir die vorherigen Posts im Objekt ausbreiten und nur das results-Array aktualisieren.
+        Wir werden es durchlaufen und dabei eine bedingte Anweisung verwenden, um zu überprüfen, ob die Post-ID mit der ID der gelikten Post übereinstimmt. Wenn sie übereinstimmt, geben wir das Post-Objekt zurück, bei dem die Anzahl der Likes um eins erhöht ist und like_id auf die ID der Antwortdaten gesetzt ist.
+        Wenn die ID nicht übereinstimmt, geben wir einfach den Post zurück und führen keine weitere Aktion damit aus, damit unsere Schleife zum nächsten Post im results-Array von prevPosts wechseln kann. */
+        }));
+    } catch (err) {
+        // console.log(err);
+    }
+    };
 
-      <Form.Group>
-        <Form.Label>Content</Form.Label>
-        <Form.Control
-          as="textarea"
-          rows={6}
-          name="content"
-          value={content}
-          onChange={handleChange}
-        />
-      </Form.Group>
-      {errors?.content?.map((message, idx) => (
-        <Alert variant="warning" key={idx}>
-          {message}
-        </Alert>
-      ))}
-
-      <Button
-        className={`${btnStyles.Button} ${btnStyles.Blue}`}
-        onClick={() => history.goBack()}
-      >
-        cancel
-      </Button>
-      <Button className={`${btnStyles.Button} ${btnStyles.Blue}`} type="submit">
-        create
-      </Button>
-    </div>
-  );
+const handleUnlike = async () => {
+    try {
+        await axiosRes.delete(`/likes/${like_id}/`);
+        setPosts((prevPosts) => ({
+        ...prevPosts,
+        results: prevPosts.results.map((post) => {
+            return post.id === id
+            ? { ...post, likes_count: post.likes_count - 1, like_id: null }
+            : post;
+        }),
+        }));
+    } catch (err) {
+        // console.log(err);
+    }
+    };
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <Row>
-        <Col className="py-2 p-0 p-md-2" md={7} lg={8}>
-          <Container
-            className={`${appStyles.Content} ${styles.Container} d-flex flex-column justify-content-center`}
-          >
-            <Form.Group className="text-center">
-              {image ? (
-                /* wenn es ein User-Bild gibt, render */
-                /* der rest ist style */
-                <>
-                  <figure>
-                    <Image className={appStyles.Image} src={image} rounded />
-                  </figure>
-                  <div>
-                    <Form.Label
-                      className={`${btnStyles.Button} ${btnStyles.Blue} btn`}
-                      htmlFor="image-upload"
-                    >
-                      Change the image
-                    </Form.Label>
-                  </div>
-                </>
-                /* Falls er kein Bild hochgeladen hat... */
-              ) : (
-                <Form.Label
-                  className="d-flex justify-content-center"
-                  htmlFor="image-upload"
-                >
-                  <Asset
-                    src={Upload}
-                    message="Click or tap to upload an image"
-                    /* die Asset component die message ist manuel */
-                  />
-                </Form.Label>
-              )}
-
-              <Form.File
-                id="image-upload"
-                accept="image/*"
-                onChange={handleChangeImage}
-                /* das neue Bild muss auch übergeben werden, damit
-                es gerendert werden kann. Durch accept muss es ein Bild sein */
-                ref={imageInput}
-                /* mit dem Hook wird es auch an die Api übergen */
+    <Card className={styles.Post}>
+        {/* das ist ein react-bootstrap cart-component mit einer Klasse */}
+        {/* dieses Component hat einen body... müssen alle importiert werden */}
+      <Card.Body>
+        <Media className="align-items-center justify-content-between">
+          <Link to={`/profiles/${profile_id}`}>
+            <Avatar src={profile_image} height={55} />
+            {owner}test
+          </Link>
+          <div className="d-flex align-items-center">
+            <span>{updated_at}</span>
+            {is_owner && postPage && (
+              <MoreDropdown
+                handleEdit={handleEdit}
+                handleDelete={handleDelete}
               />
-            </Form.Group>
-            {errors?.image?.map((message, idx) => (
-              <Alert variant="warning" key={idx}>
-                {message}
-              </Alert>
-            ))}
-
-
-            <div className="d-md-none">{textFields}</div>
-          </Container>
-        </Col>
-        <Col md={5} lg={4} className="d-none d-md-block p-0 p-md-2">
-          <Container className={appStyles.Content}>{textFields}</Container>
-        </Col>
-      </Row>
-    </Form>
+              /* importierted Moredropdown von components */
+            )}
+            {/* check if the currently logged in user is the owner,
+            and if the postPage prop exists, if so, then we know we
+            want to display the edit and delete options for our user */}
+            {/* postPage wurde von der destructurierung bzw. Mutter-comp
+            übergeben */}
+            {/* was wir dann machen (edid, delete) wird erstmal offen gelassen(...) */}
+          </div>
+        </Media>
+      </Card.Body>
+      <Link to={`/posts/${id}`}>
+        <Card.Img src={image} alt={title} />
+        {/* pass the card image component */}
+      </Link>
+      <Card.Body>
+        {title && <Card.Title className="text-center">{title}</Card.Title>}
+        {content && <Card.Text>{content}</Card.Text>}
+        {/* We'll check if the title and content props have been passed 
+        before we render the respective Bootstrap components. */}
+        <div className={styles.PostBar}>
+            {/* das werden die like and comment button */}
+          {is_owner ? (
+            <OverlayTrigger
+              placement="top"
+              overlay={<Tooltip>You can't like your own post!</Tooltip>}
+            >
+                {/* To do that we’ll use and import the OverlayTrigger 
+                and Tooltip components from Bootstrap. */}
+              <i className="far fa-heart" />
+            </OverlayTrigger>
+          ) : like_id ? (
+            /* checks if like-id exits, falls kann nicht nochmal geliked werden */
+            <span onClick={handleUnlike}>
+              <i className={`fas fa-heart ${styles.Heart}`} />
+            </span>
+          ) : currentUser ? (
+            /* checks if user is difiniert/eingeloggt */
+            <span onClick={handleLike}>
+              <i className={`far fa-heart ${styles.HeartOutline}`} />
+            </span>
+          ) : (
+            /* falls nicht eingelogged */
+            <OverlayTrigger
+              placement="top"
+              overlay={<Tooltip>Log in to like posts!</Tooltip>}
+            >
+              <i className="far fa-heart" />
+            </OverlayTrigger>
+          )}
+          {likes_count}
+          <Link to={`/posts/${id}`}>
+            <i className="far fa-comments" />
+          </Link>
+          {comments_count}
+        </div>
+      </Card.Body>
+    </Card>
   );
-}
+};
 
-export default PostCreateForm;
+export default Post;

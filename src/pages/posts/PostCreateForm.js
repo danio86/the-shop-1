@@ -19,7 +19,7 @@ import Alert from "react-bootstrap/Alert";
 import { useRedirect } from "../../hooks/useRedirect";
 
 function PostCreateForm() {
-  useRedirect("loggedOut");
+//   useRedirect("loggedOut");
   const [errors, setErrors] = useState({});
 
   const [postData, setPostData] = useState({
@@ -168,6 +168,7 @@ import and use the axiosReq instance and post  the formData to the posts endpoin
                   htmlFor="image-upload"
                 >
                   <Asset
+                    width={20}
                     src={Upload}
                     message="Click or tap to upload an image"
                     /* die Asset component die message ist manuel */
